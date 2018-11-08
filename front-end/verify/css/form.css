@@ -1,0 +1,104 @@
+
+/* 标签样式 */
+* {
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+
+ul, li {
+    list-style-type: none;
+}
+
+.sign-group {
+    width: 1090px;
+    padding: 10px;
+    margin-top: 150px;
+}
+
+.sign-input {
+    height: 70px;
+    position: relative;
+}
+
+.sign-input > span {
+    font-size: 14px;
+    color: #333;
+    text-align: right;
+    position: absolute;
+    width: 100px;
+    padding: 8px 0 ;
+}
+
+.input-text {
+    margin-left: 120px;
+}
+
+.input-text > input {
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1) inset;
+    width: 200px;
+}
+
+.input-text input:focus {
+    border: 1px solid deepskyblue;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.input-text .error-input {
+    border: 1px solid red;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.sign-input p {
+    margin-left: 120px;
+    color: red;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+.all_email {
+    width: 210px;
+    background: #fff;
+    padding: 5px 10px;
+    position: absolute;
+    left: 120px;
+    border: 1px solid #ccc;
+    display: none;
+}
+
+.all_email li {
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #e5edf2;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.all_email .li-keyup-color {
+    background: #e5edf2;
+    color: #369;
+}
+
+.all_email .li-default-color {
+    background: none;
+    color: #666;
+}
+
+.sign-submit {
+    margin-left: 120px;
+}
+
+.sign-submit input[type="button"] {
+    background: linear-gradient(#6cd211, #4cd211);
+    border: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: #fff;
+}
+
+

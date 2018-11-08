@@ -1,0 +1,356 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        
+    </head>
+
+<body>
+    <!-- 使用DOM进行控制<video> -->
+    <div style="text-align:center;">
+        <button onclick="playPause()">播放/暂停</button>
+        <button onclick="makeBig()">大</button>
+        <button onclick="makeNormal()">中</button>
+        <button onclick="makeSmall()">小</button>
+        <br />
+        <video id="video1" width="420" style="margin-top:15px;">
+            <source src="/example/html5/mov_bbb.mp4" type="video/mp4" />
+            <source src="/example/html5/mov_bbb.ogg" type="video/ogg" /> Your browser does not support HTML5 video.
+        </video>
+    </div>
+
+    <script type="text/javascript">
+        var myVideo=document.getElementById("video1");
+
+        function playPause()
+        { 
+            if (myVideo.paused) 
+                myVideo.play(); 
+            else 
+                myVideo.pause(); 
+        } 
+
+        function makeBig()
+        { 
+            myVideo.width=560; 
+        } 
+
+        function makeSmall()
+        { 
+            myVideo.width=320; 
+        } 
+
+        function makeNormal()
+        { 
+            myVideo.width=420; 
+        } 
+    </script>
+
+    <!-- 音频 -->
+    <audio src="/i/song.ogg" controls="controls">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- source元素可以链接不同的音频文件，浏览器将使用第一个可识别的格式 -->
+    <audio controls="controls">
+        <source src="song.ogg" type="audio/ogg">
+        <source src="song.mp3" type="audio/mpeg"> Your browser does not support the audio tag.
+    </audio>
+
+    <!-- 
+        拖放 
+        <img>为了使元素可拖动，把 draggable 属性设置为 true 
+        拖动什么 - ondragstart 和 setData(), ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据,
+        dataTransfer.setData() 方法设置被拖数据的数据类型和值
+        放到何处 - ondragover, ondragover 事件规定在何处放置被拖动的数据,
+        通过调用 ondragover 事件的 event.preventDefault() 方法
+        进行放置 - ondrop,  ondrop 属性调用了一个函数，drop(event)
+
+        代码解释：
+        调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）
+        通过 dataTransfer.getData("Text") 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。
+        被拖数据是被拖元素的 id ("drag1")
+        把被拖元素追加到放置元素（目标元素）中
+
+    -->
+    <script type="text/javascript">
+        function allowDrop(ev)
+        {
+            ev.preventDefault();
+        }
+        function drag(ev)
+        {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+        function drop(ev)
+        {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data))
+        }
+    </script>
+    <div id="div1" ondrag="drop(event)" ondragover="allowDrop(event)">
+    </div>
+    <img id="drag1" src="img_logo.git" draggable="true" ondragstart="drag(event)"
+    width="336" height="69" />
+
+    <!-- Canvas绘画图形 
+        canvas 本身不具备绘画能力，所有的绘画工作必须在javascript内部完成。
+    -->
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;">
+
+    </canvas>
+    <script type="text/javascript">
+        var c = document.getElementById("myCanvas");
+        var cxt = c.getContext("2d");
+        cxt.fillStyle="#FF0000";    
+        cxt.fillRect(0,0,150,75); 
+        var c = document.getElementById("myCanvas");
+        var cxt = c.getContext("2d");
+        cxt.moveTo(10,10);
+        cxt.lineTo(150,50);
+        cxt.lineTo(10,50);
+        cxt.stroke();
+        var c = document.getElementById('myCanvas');
+        var cxt = c.getContext("2d");
+        cxt.fillStyle = "blue";
+        cxt.beginPath();
+        cxt.arc(70, 18, 15, 0, Math.PI*2, true)
+        cxt.closePath();
+        cxt.fill();
+    </script>
+    <canvas id="sd" width="200" height="100" style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+    </canvas>
+    <script type="text/javascript">
+        var c = document.getElementById("sd");
+        var cxt = c.getContext("2d");
+        var grd = cxt.createLinearGradient(0, 0, 175, 50);
+        grd.addColorStop(0, "#FF0000");
+        grd.addColorStop(1, "#00FF00");
+        cxt.fillStyle = grd;
+        cxt.fillRect(0, 0, 175, 50);
+
+        var c=document.getElementById("sd");
+        var cxt=c.getContext("2d");
+        var img=new Image()
+        img.src="flower.png"
+        cxt.drawImage(img,0,0);
+    </script>
+
+    
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+        <polygon points="100,10 40,180 190,60 10,60 160,180"
+        style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+    </svg>
+
+    <!-- 使用地理定位  使用 getCurrentPosition() 方法来获得用户的位置。 -->
+    <p id="demo">点击这个按钮，获得您的坐标：</p>
+    <button onclick="getLocation()">试一下</button>
+    <script>
+        var x = document.getElementById("demo");
+        function getLocation()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else
+            {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position)
+        {
+            x.innerHTML = "Latitude: " + position.coords.latitude + 
+            "<br />Longitude: " + position.coords.longitude;
+        }
+
+        /**
+         * 处理错误和拒绝
+         * 
+         * 错误代码：
+            Permission denied - 用户不允许地理定位
+            Position unavailable - 无法获取当前位置
+            Timeout - 操作超时
+         */
+        var x=document.getElementById("demo");
+        function getLocation()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
+            }
+            else{
+                x.innerHTML="Geolocation is not supported by this browser.";}
+        }
+        function showPosition(position)
+        {
+            x.innerHTML="Latitude: " + position.coords.latitude + 
+            "<br />Longitude: " + position.coords.longitude;	
+        }
+        function showError(error)
+        {
+            switch(error.code) 
+            {
+                case error.PERMISSION_DENIED:
+                x.innerHTML="User denied the request for Geolocation."
+                break;
+                case error.POSITION_UNAVAILABLE:
+                x.innerHTML="Location information is unavailable."
+                break;
+                case error.TIMEOUT:
+                x.innerHTML="The request to get user location timed out."
+                break;
+                case error.UNKNOWN_ERROR:
+                x.innerHTML="An unknown error occurred."
+                break;
+            }
+        }
+
+        /**Geolocation 对象 - 其他有趣的方法
+         * watchPosition() 方法。您需要一台精确的 GPS 设备来测试该例
+         */
+        var x=document.getElementById("demo");
+        function getLocation()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.watchPosition(showPosition);
+            }
+            else{x.innerHTML="Geolocation is not supported by this browser.";}
+        }
+        function showPosition(position)
+        {
+            x.innerHTML="Latitude: " + position.coords.latitude + 
+            "<br />Longitude: " + position.coords.longitude;	
+        }
+    </script>
+
+    <!-- Web 存储 -->
+    <script type="text/javascript">
+        localStorage.lastname = "Smith";
+        document.write("Last name: " + localStorage.lastname + "<br />");
+        if (localStorage.pagecount)
+        {
+            localStorage.pagecount = Number(localStorage.pagecount) + 1;
+        }
+        else
+        {
+            localStorage.pagecount = 1;
+        }
+        document.write("Visits " + localStorage.pagecount + " time(s).");
+    </script>
+
+    <p>刷新页面会看到计数器在增长。</p>
+
+    <p>请关闭浏览器窗口，然后再试一次，计数器会继续计数。</p>
+    <script type="text/javascript">
+        sessionStorage.lastname = "Smith";
+        document.write(sessionStorage.lastname + "<br />");
+        if (sessionStorage.pagecount)
+        {
+            sessionStorage.pagecount = Number(sessionStorage.pagecount) + 1;
+        }
+        else
+        {
+            sessionStorage.pagecount = 1;
+        }
+        document.write("Visits " + sessionStorage.pagecount + " time(s) this session.");
+    </script>
+    <p>刷新页面会看到计数器在增长。</p>
+
+    <p>请关闭浏览器窗口，然后再试一次，计数器已经重置了。</p>
+
+    <!-- 应用程序缓存 
+    
+    离线浏览 - 用户可在应用离线时使用它们
+    速度 - 已缓存资源加载得更快
+    减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源。
+
+    -->
+    <p>计数: <output id="result"></output></p>
+    <button onclick="startWorker()">开始 Worker</button> 
+    <button onclick="stopWorker()">停止 Worker</button>
+    <br /><br />
+    <script type="text/javascript">
+        var w;
+        function startWorker()
+        {
+            if (typeof(Worker) != "undefined")
+            {
+                w = new Worker("demo_workers.js");
+                w.onmessage = function (event) {
+                    document.getElementById("result").innerHTML=event.data;
+                };
+            }
+            else
+            {
+                document.getElementById("result").innerHTML="Sorry, your browser does not support Web Workers...";
+            }
+        }
+        function stopWorker()
+        { 
+            w.terminate();
+        }
+    </script>
+    <!-- 服务器发送事件 -->
+    <h1>获得服务器更新</h1>
+    <div id="result"></div>
+    <script type="text/javascript">
+        if (typeof(EventSource) !== "undefined")
+        {
+            var source =new EventSource("demo_sse.php");
+            source.onmessage = function(event)
+            {
+                document.getElementById("result").innerHTML += event.data + "<br />";
+            };
+        }
+        else
+        {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+        }
+    </script>
+    <!-- Input 类型 -->
+    
+    <form method="get">
+        E-mail: <input type="email" name="user_email" />
+        Homepage: <input type="url" name="user_url" />
+        Points: <input type="number" name="user_number" min="1" max="10" />
+        <input type="range" name="points" min="1" max="10" />
+        Data: <input type="date" name="user_data" />
+        <input type="submit" value="提交查询" />
+    </form>
+    <!-- 表单元素 -->
+    <form>
+        webpage: <input type="url" list="url_list" name="link" />
+        <datalist id="url_list">
+            <option label="W3School" value="http://www.w3school.com.cn">
+            <option label="Google" value="http://www.google.com" />
+            <option label="Microsoft" value="http://www.micorsoft.com" />
+        </datalist>
+        Username: <input type="text" name="url_name" />
+        Encryption: <keygen name="security" />
+        <input type="submit" />
+    </form>
+    <!-- 表单属性 -->
+    <form action="demo_form.asp" method="get" autocomplete="on" id="user_form">
+        First name: <input type="text" name="fname" /><br />
+        Last name: <input type="text" name="lname" /><br />
+        E-mail: <input type="email" name="email" autocomplete="off" /><br />
+        <!--获取焦点-->
+        User name: <input type="text" name="user_name" autofocus="autofocus"/>
+        <input type="submit" />
+    </form>
+    name: <input type="text" name="name" form="user_form" />
+    <!--对创建不同的提交按钮有帮助--> 
+    <form action="demo_form.asp" method="get" id="user_form">
+        E-mail: <input type="email" name="userid" /><br />
+        <input type="submit" value="Submit" />
+        <br />
+        <input type="submit" formaction="demo_admin.asp" value="Submit as admin" />
+        <br />
+        <input type="submit" formnovalidate="true" value="Submit without validation" />
+        <br />
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>改变Div任意属性</title>
+	<style>
+		.div1 {
+			width: 400px;
+			height: 400px;
+			margin: 0 auto;
+		}
+		
+		p {
+			text-align: center;
+		}
+		
+		#change {
+			width: 200px;
+			height: 200px;
+			background: #000;
+			margin: 10px auto;
+		}
+	</style>
+	<script>
+		window.onload = function() {
+			var change = document.getElementById('change');
+			var name = document.getElementsByTagName('input')[0];
+			var value = document.getElementsByTagName('input')[1];
+			var btn = document.getElementsByTagName('button');
+			btn[0].onclick = function () {
+				change.style[name.value] = value.value;
+			}
+			btn[1].onclick = function() {
+				change.style.cssText = "";
+			}
+		}
+		
+	</script>
+</head>
+
+<body>
+	<div class="div1">
+		<p>
+			属性名：<input type="text" value="background" placeholder="属性名" />
+		</p>
+		<p>
+			属性值：<input type="text" value="blue" placeholder="属性值" />
+		</p>
+		<p>
+			<button>确定</button>
+			<button>取消</button>
+		</p>
+
+		<div id="change">
+		</div>
+	</div>
+</body>
+
+</html>

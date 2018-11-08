@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>HTML5 Video - 创建视频时序查看器</title>
+</head>
+
+<body>
+    <video id="movies" autoplay oncanplay="startVideo()" onended="stopTimeline()" 
+                autobuffer="true" width="400px" height="300px" controls>
+            <source src="Intermission-Walk-in.ogv">
+            <source src="Intermission-Walk-in_512kb.mp4" >
+    </video>
+    <canvas id="timeline" width="400px" height="300px" >
+    </canvas>
+
+    <script type="text/javascript">
+        // 抓取帧的时间间隔：单位是ms 
+        var updateInterval = 5000;
+
+        // 时序线帧的大小
+        var frameWidth = 100;
+        var frameHeight = 75;
+
+        // 时间线帧的数量
+        var frameRows = 4;
+        var frameColumns = 4;
+        var frameGrid = frameRows * frameColumns;
+
+        // 当前帧
+        var frameCount = 0;
+
+        // 播放完后取消计时器
+        var intervalId;
+
+        var videoStarted = false;
+
+        function startVideo() {
+            // 只在视频第一次播放时
+            // 设置计时器
+            if (videoStarted) {
+                return ;
+            }
+            videoStarted = true;
+
+            // 计算初始帧， 然后以规定时间间隔
+            // 创建全体帧
+            updateFrame();
+            intervalId = setInterval(updateFrame, updateInterval); 
+
+            // 单击帧时设置处理器搜索视频
+            var timeline = document.getElementById('timeline');
+            timeline.onclick = function(e) {
+                var offX = e.layerX - timeline.offsetLeft;
+                var offY = e.layerY - timeline.offsetTop;
+
+                // 从索引0开始计算单击的是网格中的哪个帧
+                var clickedFrame = Math.floor(offY / frameHeight) *frameRows;
+                clickedFrame += Math.floor(offX / frameWidth);
+
+                // 打开启频后，找到实际的帧
+                var seekedFrame = (((Math.floor(frameCount / frameGrid)) *
+                                    frameGrid) + clickedFrame);
+
+                // 如果用户单击当前帧前面的帧，那么假设它是最后一轮帧
+                if (clickedFrame > (frameCount % 16))
+                    seekedFrame -= frameGrid;
+
+                // 不能再视频播放前搜索
+                if (seekedFrame < 0)
+                    return;
+                
+                // 搜索视频到那一帧（以秒为单位）
+                var video = document.getElementById('movies');
+                video.currentTime = seekedFrame * updateInterval / 1000;
+
+                // 然后将帧数设置给目标
+                frameCount = seekedFrame;
+            }
+        }
+
+        // 把帧绘制到画布上
+        function updateFrame() {
+            var video = document.getElementById('movies');
+            var timeline = document.getElementById('timeline');
+
+            var ctx = timeline.getContext('2d');
+
+            // 根据帧数计算出当前播放位置
+            // 然后以视频为输入参数
+            // 绘制图像
+            var framePosition = frameCount % frameGrid;
+            var frameX = (framePosition % frameColumns) * frameWidth;
+            var frameY = (Math.floor(framePosition /frameRows)) * frameHeight;
+            ctx.drawImage(video, 0, 0, 400, 300, frameX, frameY, frameWidth, frameHeight);
+
+            frameCount ++;            
+        }
+
+        // 停止收集时间线帧
+        function stopTimeline() {
+            clearInterval(intervalId);
+        }
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Communication - 跨文档消息通信</title>
+</head>
+
+<body>
+
+</body>
+
+    <script>
+        window.addEventListener('message', messageHandler, true);
+        function messageHandler(e) {
+            switch(e.origin) {
+                case 'friend.example.com':
+                    // 处理消息
+                    processMessage(e.data);
+                    break;
+                default:
+                    // 消息来源无法识别
+                    // 消息被忽略
+            }
+        }
+        
+        // 检测浏览器是否支持
+        if(typeof window.postMessage == 'undefined'){
+            // 该浏览器不支持postMessage
+        }
+        // 发送消息
+        window.postMessage('Hello, world', 'portal.example.com');
+
+        document.getElementsByTagName('iframe')[0].contentWindow.postMessage('Hello, world',
+            'chat.example.net');
+        
+        // 监听消息事件
+        var originWhiteList = ['portal.example.com', 'games.example.com', 'www.example.com'];
+        
+        function checkWhiteList(origin) {
+            for (var i=0; i < originWhiteList.length; i++) {
+                if (origin == originWhiteList[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function messageHandler(e) {
+            if (checkWhiteList(e.origin)) {
+                processMessage(e.data);
+            } else {
+                // 忽略来自未知源的消息
+            }
+        }
+
+    </script>
+
+</html>

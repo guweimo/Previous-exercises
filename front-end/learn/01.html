@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+	<title>控制div属性</title>
+    <style>
+        .outer {
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .div1 {
+            width: 100px;
+            background: #000;
+            height: 100px;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            var btn = document.getElementsByTagName('input');
+            var div = document.getElementsByClassName('div1')[0];
+            var ary = ['width', 'height', 'background', 'display', 'display']
+            var val = ['200px', '200px', 'red', 'none', 'block']
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].index = i;
+                btn[i].onclick = function() {
+                    this.index == btn.length - 1 && (div.style.cssText = '');
+                    div.style[ary[this.index]] = val[this.index];
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+     <div class="outer">
+         <input type="button" value="变宽">
+         <input type="button" value="变高">
+         <input type="button" value="变色">
+         <input type="button" value="隐藏">
+         <input type="button" value="重置">
+         <div class="div1"></div>
+     </div>
+</body>
+
+</html>

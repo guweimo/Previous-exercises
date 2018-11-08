@@ -1,0 +1,777 @@
+*{
+    font-size: 12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul, dd, dl, h2, p, form, input{
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+#header {
+    width: 900px;
+    height: 30px;
+    margin: 0 auto;
+    background: linear-gradient(#eee, #ddd);
+}
+
+#header .member {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    background: blue;
+    position: relative;
+}
+
+.member ul {
+    position: absolute;
+    background: #FBF7E1;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #999;
+    border-top: none;
+    padding: 10px 0 0 0;
+    display: none;
+}
+
+.member ul li {
+    height: 23px;
+    line-height: 23px;
+    text-indent: 20px;
+}
+
+.member ul li a {
+    display: block;
+    text-decoration: none;
+    color: blue;
+}
+
+.member ul li a:hover {
+    color: red;
+}
+
+.login, .reg{
+    float: right;
+    height: 30px;
+    width: 35px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+#screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 9998;
+    opacity: 0.3;
+    display: none;
+}
+
+
+#login {
+    width: 350px;
+    height: 250px;
+    border: 1px solid #ccc;
+    background: #fff;
+    position: absolute;
+    display: none;
+    z-index: 9999;
+}
+
+#login h2{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #666;
+    background: linear-gradient(#ccc, #aaa);
+    margin: 0 0 20px 0;
+    cursor: move;
+}
+
+#login h2 span {
+    float: right;
+    position: relative;
+    right: 8px;
+    cursor: pointer;
+}
+
+#login input.text {
+    width: 200px;
+    height: 25px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+#login div.user, #login div.pass {
+    font-size: 14px;
+    color: #ccc;
+    padding: 5px 0;
+    text-align: center;
+}
+
+#login .button {
+    text-align: center;
+    padding: 10px 0;
+}
+
+#login input.submit {
+    width: 100px;
+    height: 30px;
+    background: linear-gradient(greenyellow, green);
+    border: none;
+    cursor: pointer;
+}
+
+#login .other{
+    text-align: right;
+    padding: 20px 5px;
+    font-size: 14px;
+}
+
+#reg {
+    width: 600px;
+    height: 550px;
+    border: 1px solid #ccc;
+    background: #fff;
+    position: absolute;
+    display: none;
+    z-index: 9999;
+}
+
+#reg h2{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #666;
+    background: linear-gradient(#ccc, #aaa);
+    margin: 0 0 20px 0;
+    cursor: move;
+}
+
+#reg h2 span {
+    float: right;
+    position: relative;
+    right: 8px;
+    cursor: pointer;
+}
+
+#reg dl {
+    font-size: 14px;
+    color: #666;
+    margin: 20px;
+    position: relative;
+}
+
+#reg dl dd {
+    height: 30px;
+    padding: 5px 0;
+}
+
+#reg dl dd input.text, #reg dl dd select {
+    width: 200px;
+    height: 25px;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #666;
+}
+
+#reg dl dd select {
+    width: 204px;
+}
+
+#reg dl dd.birthday select {
+    width: 70px;
+}
+
+#reg dl dd textarea {
+    width: 360px;
+    height: 100px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+#reg dl dd.ps {
+    padding: 0 0 0 300px;
+}
+
+#reg dl dd strong.num {
+    padding: 0 2px;
+}
+
+#reg dl dd span.clear {
+    color: #06f;
+    cursor: pointer;
+}
+
+#reg dl dd input.submit {
+    width: 140px;
+    height: 35px;
+    background: linear-gradient(#06f, blue);
+    cursor: pointer;
+    border: none;
+}
+
+#reg dl dd span.info, #reg dl dd span.error, #reg dl dd span.succ {
+    font-size: 12px;
+    color: #333;
+    width: 165px;
+    height: 32px;
+    line-height: 32px;
+    display: block;
+    padding:  0 0 0 35px;
+    border: 1px solid #ccc;
+    position: absolute;
+    display: none;
+}
+
+#reg dl dd span.succ {
+    height: 14px;
+    line-height: 14px;
+    padding: 0 0 0 20px;
+    color: green;
+    border: none;
+}
+
+#reg dl dd span.info_user {
+    height: 43px;
+    line-height: 18px;
+    padding-top: 7px;
+    top: 0;
+    left: 295px;
+}
+
+#reg dl dd span.error_user {
+    top: 0;
+    left: 295px;
+}
+
+#reg dl dd span.succ_user {
+    top: 12px;
+    left: 295px;
+}
+
+#reg dl dd span.info_pass {
+    width: 244px;
+    height: 106px;
+    padding: 4px 0 0 16px;
+    top: 5px;
+    left: 295px;
+    letter-spacing: 0;
+}
+
+#reg dl dd span.info_pass p{
+    height: 25px;
+    line-height: 25px;
+    color: #333;
+}
+
+#reg dl dd span.info_pass p strong.s {
+    color: #ccc;
+}
+
+#reg dl dd span.error_pass {
+    top: 43px;
+    left: 295px;
+}
+
+#reg dl dd span.succ_pass {
+    top: 52px;
+    left: 295px;
+}
+
+#reg dl dd span.info_notpass {
+    top: 83px;
+    left: 295px;
+    display: none;
+}
+
+#reg dl dd span.error_notpass {
+    top: 83px;
+    left: 295px;
+}
+
+#reg dl dd span.succ_notpass {
+    top: 92px;
+    left: 295px;
+}
+
+#reg dl dd span.error_ques {
+    top: 123px;
+    left: 295px;
+}
+
+#reg dl dd span.info_ans {
+    top: 163px;
+    left: 295px;
+    display: none;
+}
+
+#reg dl dd span.error_ans {
+    top: 163px;
+    left: 295px;
+}
+
+#reg dl dd span.succ_ans {
+    top: 172px;
+    left: 295px;
+}
+
+#reg dl dd span.info_email {
+    top: 203px;
+    left: 295px;
+    display: none;
+}
+
+#reg dl dd span.error_email {
+    top: 203px;
+    left: 295px;
+}
+
+#reg dl dd span.succ_email {
+    top: 212px;
+    left: 295px;
+}
+
+#reg dl dd ul.all_email {
+    width: 180px;
+    height: 130px;
+    background: #fff;
+    padding: 5px 10px;
+    position: absolute;
+    top: 231px;
+    left: 60px;
+    border: 1px solid #ccc;
+    display: none;
+}
+
+#reg dl dd ul.all_email li {
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #e5edf2;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+#reg dl dd span.error_birthday {
+    top: 241px;
+    left: 350px;
+}
+
+#nav {
+    width: 465px;
+    height: 52px;
+    background: linear-gradient(#eee, #ccc);
+    margin: 50px auto 0 auto;
+    position: relative;
+    border-radius: 6px;
+}
+
+#nav ul {   
+    position: absolute;
+}
+
+#nav ul.black {
+    left: 20px;
+    z-index: 1;
+}
+
+#nav ul.white {
+    width: 425px;
+    color: #fff;
+    z-index: 3;
+    left: 0px;
+}
+
+#nav ul.about {
+    z-index: 4;
+    left: 26px;
+    cursor: pointer;
+}
+
+#nav div.nav_bg {
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: linear-gradient(#222, #111) 0 6px;
+    border-radius: 5px;
+    position: absolute;
+    left: 26px;
+    top: 6px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+#nav div.nav_bg ul{
+    top: -6px;
+    left: -6px;
+}
+
+#nav ul li {
+    width: 85px;
+    height: 52px;
+    text-align: center;
+    line-height: 52px;
+    font-weight: bold;
+    float: left;
+}
+
+#main {
+    width: 900px;
+    margin: 50px auto;
+}
+
+#sidebar {
+    width: 250px;
+    background: #eee;
+    float: left;
+}
+
+#sidebar h2 {
+    width: 248px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    background: linear-gradient(#fff, #ddd);
+    text-indent: 10px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 0;
+}
+
+#sidebar ul{
+    font-size: 20px;
+    height: 150px;
+    border: 1px solid #ccc;
+    margin: 0 0 10px 0 ;
+    overflow: hidden;
+}
+
+#sidebar ul li {
+    height: 30px;
+    line-height: 30px;
+    text-indent: 30px;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+#sidebar ul li a:hover {
+    color: dodgerblue;
+}
+
+#index {
+    width: 630px;
+    height: 570px;
+    background: #eee;
+    float: right;
+}
+
+#banner {
+    width: 900px;
+    height: 150px;
+    float: left;
+    margin: 10px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#banner img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 900px;
+    height: 150px;
+}
+
+#banner ul {
+    position: absolute;
+    top: 128px;
+    left: 420px;
+    z-index: 4;
+}
+
+#banner ul li {
+    float: left;
+    padding: 0 5px;
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;    
+}
+
+#banner span {
+    width: 900px;
+    height: 25px;
+    position: absolute;
+    top: 125px;
+    left: 0;
+    opacity: 0.3;
+    z-index: 3;
+}
+
+#banner strong {
+    position: absolute;
+    color: #fff;
+    top: 130px;
+    left: 10px;
+    z-index: 4;
+}
+
+#photo {
+    width: 900px;
+    float: left;
+}
+
+#photo dl {
+    width: 225px;
+    height: 270px;
+    float: left;
+    margin: 5px 0 15px 0 ;
+}
+
+#photo img {
+    width: 200px;
+    height: 250px;
+    cursor: pointer;
+    display: block;
+}
+
+#photo dl dt {
+    width: 200px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+#photo dl dd {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+
+
+#photo_big {
+    width: 620px;
+    height: 511px;
+    border: 1px solid #ccc;
+    background: #fff;
+    position: absolute;
+    display: none;
+    z-index: 9999;
+}
+
+#photo_big h2{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #666;
+    background: linear-gradient(#ccc, #aaa);
+    cursor: move;
+}
+
+#photo_big h2 span {
+    float: right;
+    position: relative;
+    right: 8px;
+    cursor: pointer;
+}
+
+#photo_big .big {
+    width: 620px;
+    height: 460px;
+    padding: 10px 0 0;
+    background: #333;
+}
+
+#photo_big .big img {
+    display: block;
+    margin: 0 auto;
+}
+
+#photo_big .big strong {
+    display: block;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background: #000;
+    opacity: 0.5;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+}
+
+#photo_big .big strong.sl {
+    top: 210px;
+    left: 20px;
+}
+
+#photo_big .big strong.sr {
+    top: 210px;
+    right: 20px;
+}
+
+#photo_big .big span {
+    display: block;
+    width: 300px;
+    height: 450px;
+    opacity: 0;
+    background: #000;
+    position: absolute;
+    cursor: pointer;
+}
+
+#photo_big .big span.left {
+    top: 50px;
+    left: 10px;
+}
+
+#photo_big .big  span.right {
+    top: 50px;
+    right: 10px;
+}
+
+#photo_big .big em {
+    position: absolute;
+    top: 480px;
+    right: 20px;
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+#main::after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
+#box {
+    background: red;
+    border: 1px solid #666;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+}
+#pox {
+    background: red;
+    border: 1px solid #666;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+}
+
+#share {
+    width: 210px;
+    height: 315px;
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 0;
+    left: -212px;
+    z-index: 888;
+    background: #fff;
+}
+
+#share h2 {
+    height: 30px;
+    line-height: 30px;
+    background: #eee;
+    padding: 0;
+    margin: 0;
+    color: #666;
+    text-indent: 10px;
+    font-size: 14px;
+}
+
+#share ul {
+    padding: 3px 0 2px 5px;
+    height: 254px;
+}
+
+#share ul li {
+    width: 96px;
+    height: 28px;
+    float: left;
+    padding:  2px;
+}
+
+#share ul li a {
+    display: block;
+    width: 95px;
+    height: 26px;
+    line-height: 26px;
+    text-decoration: none;
+    color: #666;
+}
+
+#share ul li a:hover {
+    color: #06f;
+    background-color: #aaa;
+}
+
+#share .share_footer {
+    background: #aaa;
+    height: 26px;
+    position: relative;
+}
+
+#share .share_footer a {
+    position: absolute;
+    padding: 0 0 0 14px;
+    top: 2px;
+    left: 120px;
+    text-decoration: none;
+    color: #666;
+}
+
+#share .share_footer a:hover {
+    color: #06f;
+}
+
+#share .share_footer span {
+    background: #111;
+    display: block;
+    width: 24px;
+    height: 88px;
+    position: absolute;
+    top: -230px;
+    left: 210px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+}

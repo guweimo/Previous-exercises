@@ -1,0 +1,46 @@
+
+
+
+onclick     点击事件
+onload      打开网页的事件
+onunload    离开网页的事件
+onchange    输入验证的事件
+onmouseover 移动到某元素上的鼠标事件
+onmouseout  离开某元素上的鼠标事件
+onmousedown 一直点击触发的事件
+onmouseup   释放鼠标的事件
+
+
+
+element.getElementById
+element.getElementsByClassName
+element.getElementsByTagName
+element.id
+element.classname
+element.firstChild
+element.lastChild
+element.appendChild
+element.insertBefore
+element.createElement
+element.createTextNode
+element.removeChild
+element.replaceChild
+element.hasAttribute
+element.hasAttributes
+element.getAttribute
+element.setAttrbite
+element.innerHTML
+element.innerText
+element.value
+element.title
+element.lang
+element.tabIndex
+element.tagName
+element.offsetHeight
+element.offsetWidth
+element.clientHeight
+element.clientWidth
+element.scrollHeight
+element.scrollWidth
+element.scrollTop
+element.scrollLeft

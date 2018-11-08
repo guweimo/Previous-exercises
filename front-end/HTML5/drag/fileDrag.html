@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+	<title>拖动</title>
+    <script>
+        var droptarget;
+
+        // 在显示区域
+        function setStatus(text) {
+            document.getElementById('status').innerHTML = text;
+        }
+
+        function loadDemo() {
+            droptarget = document.getElementById('droptarget');
+            droptarget.className = 'validtarget';
+
+            droptarget.addEventListener('dragenter', handleDragEnter, false);
+            droptarget.addEventListener('dragover', handleDragOver, false);
+            droptarget.addEventListener('dragleave', handleDragLeave, false);
+            droptarget.addEventListener('drop', handleDrop, false);
+
+            setStatus('Drag files into this area.');
+        }
+        window.addEventListener('load', loadDemo, false);
+
+
+        // 文件放置的dragenter事件处理器
+        // 处理放置目标上的拖动事件
+        function handleDragEnter(evt) {
+            // 如果浏览器支持在拖动中访问文件列表， 则显示文件数量
+            var files = evt.dataTransfer.files;
+
+            if (files) {
+                setStatus('There are ' + evt.dataTransfer.files.length + ' files in thie drag.');
+            } else {
+                setStatus('There are unknown items in this drag.')
+            }
+
+            droptarget.className = 'highlighted';
+            evt.stopPropagation();
+            evt.preventDefault();
+
+            return false;
+        }
+
+        // 屏蔽默认的dragover操作对于成功执行放置操作来说很有必要
+        function handleDragOver(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+
+            return false;
+        }
+
+        // 拖动移出时，重置文本和状态
+        function handleDragLeave(evt) {
+            setStatus('Drag files into this area.');
+
+            droptarget.className = 'validtarget';
+
+            return false;
+        }
+
+        // 文件放置的drop事件处理器
+        // 处理文件放置
+        function handleDrop(evt) {
+            // 取消事件，避免直接打开文件
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            var filelist = evt.dataTransfer.files;
+            var message = 'There were ' + filelist.length + ' files dropped.';
+
+            // 在拖动中显示每个文件的详情列表
+            message += '<ol>';
+            
+            [].forEach.call(filelist, function(file) {
+                message += "<li>";
+                message += "<strong>" + file.name + '</strong>';
+                message += "(<em>" + file.type + "</em>) : ";
+                message += "size: " + files.size + ' bytes - ';
+                message += 'modified: ' + filed.lastModifiedDate;
+                message += "</li>";
+            });
+
+            message += '</ol>';
+
+            setStatus(message);
+            droptarget.className = 'validtarget';
+
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="droptarget">
+        <div id="status">
+            
+        </div>
+    </div>
+</body>
+
+</html>

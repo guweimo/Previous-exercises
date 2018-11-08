@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>HTML5 Audio - play按钮控制音频</title>
+</head>
+
+<body>
+    <audio id="clickSound">
+        <source src="johann_sebastian_bach_air.ogg" />
+        <source src="johann_sebastian_bach_air.mp3" />
+        An audio clip from Johann Sebastian Bach.
+    </audio>
+    <button id="toggle" onclick="toggleSound()">Play</button>
+
+    <script type="text/javascript">
+        function toggleSound() {
+            var music = document.getElementById('clickSound');
+            var toggle = document.getElementById('toggle');
+
+            if (music.paused) {
+                music.play();
+                toggle.innerHTML = 'Pause';
+            } else {
+                music.pause();
+                toggle.innerHTML = 'Play';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Canvas - 变换</title>
+</head>
+
+<body>
+    <canvas id="trails" style="border: 1px solid" width="400" height="550">
+    </canvas>
+    <script>
+        var bark = new Image();
+        bark.src = "imgs/CHD0006.jpg";
+        bark.onload = function() {
+            drawTrails();
+        }
+
+        function createCanopyPath(context) {
+            // 绘制树冠
+            context.beginPath();
+            context.moveTo(-25, -50);
+            context.lineTo(-10, -80);
+            context.lineTo(-20, -80);
+            context.lineTo(-5, -110);
+            context.lineTo(-15, -110);
+
+            // 树的顶点
+            context.lineTo(0, -140);
+
+            context.lineTo(15, -110);
+            context.lineTo(5, -110);
+            context.lineTo(20, -80);
+            context.lineTo(10, -80);
+            context.lineTo(25, -50);
+
+            // 连接起点，闭合路径
+            context.closePath();    
+        }
+
+        function drawTree(context) {
+            // 在（130，250）的位置绘制第一颗树
+            // 创建用于填充树干的三阶水平渐变色
+            // 保存canvas的当前状态
+            context.save();
+
+            // X值随着Y值的增加而增加，借助拉伸变换
+            // 可以创建一棵用作阴影的倾斜的树
+            // 应用了变换以后，
+            // 所有坐标都与矩形相乘
+            context.transform(1, 0, -0.5, 1, 0, 0);
+
+            // 在Y轴方向，将阴影的高度压缩为原来的60%
+            context.scale(1, 0.6);
+
+            // 使用透明度为20%的黑色填充树干
+            context.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            context.fillRect(-5, -50, 10, 50);
+
+            // 使用已有的阴影效果重新绘制树
+            createCanopyPath(context)
+            // 恢复之前的canvas状态
+            context.fill();
+            context.restore();
+
+            var trunkGradient = context.createLinearGradient(-5, -50, 5, -50);
+            trunkGradient.addColorStop(0, '#663300');
+            trunkGradient.addColorStop(0.4, '#996600');
+            trunkGradient.addColorStop(1, '#552200');
+            context.fillStyle = trunkGradient;
+            context.fillRect(-5, -50, 10, 50);
+
+            var canopyShadow = context.createLinearGradient(0, -50, 0, 0);
+            canopyShadow.addColorStop(0, 'rgba(0, 0, 0, 0.5)');
+            canopyShadow.addColorStop(0.2, 'rgba(0, 0, 0, 0.0)');
+            context.fillStyle = canopyShadow;
+            context.fillRect(-5, -50, 10, 50);
+
+
+            createCanopyPath(context);
+            context.lineWidth = 4;
+            context.lineJoin = 'round';
+            context.strokeStyle = '#663300';
+            context.stroke();
+
+            context.fillStyle = '#339900';
+            context.fill();
+        }
+
+        function drawTrails() {
+            var canvas = document.getElementById('trails');
+            var context = canvas.getContext('2d');
+            
+            // 在（130，250）的位置绘制第一颗树
+            context.save();
+            context.translate(130, 250);
+            drawTree(context);
+            context.restore();
+
+            // 在（260， 500）的位置绘制第二颗树
+            context.save();
+            context.translate(260, 500);
+
+            // 将第二棵树的高宽分别放大至原来的两倍
+            context.scale(2, 2);
+            drawTree(context);
+            context.restore();
+            
+
+            // 保存canvas的状态并绘制路径
+            context.save();
+
+            context.translate(-10, 350);
+            context.beginPath();
+            // 第一条曲线向右上角弯曲
+            context.moveTo(0, 0);
+            context.quadraticCurveTo(170, -50, 260, -190);
+
+            // 第二条曲线向右下方弯曲
+            context.quadraticCurveTo(310, -250, 410, -250);
+            
+            // 使用棕色的粗线条来绘制路径
+            context.strokeStyle = '#663300';
+            context.lineWidth = 20;
+            context.stroke();
+
+            // 恢复之前的canvas状态
+            context.restore();
+        }
+
+        
+
+        
+
+        // window.addEventListener('load', drawTrails, true);
+    </script>
+</body>
+
+</html>

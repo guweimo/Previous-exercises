@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+	<title></title>
+    <script>
+        function checkStorageSupport() {
+            // sessionStorage
+            if (window.sessionStorage) {
+                alert('This browser supports sessionStorage');
+            } else {
+                alert('This browser does NOT support sessionStorage');
+            }
+
+            // localStorage
+            if (window.localStorage) {
+                alert('This browser supports localStorage');
+            } else {
+                alert('This browser does NOT support localStorage');
+            }
+        }
+
+        window.addEventListener('load', checkStorageSupport, true);
+
+        // 设置和获取网页中的简单数据
+        sessionStorage.setItem('myFirstKey', 'myFirstValue');
+        alert(sessionStorage.getItem('myFirstKey'));
+
+        sessionStorage.myFirstKey = 'myFirstValue2';
+        alert(sessionStorage.myFirstKey);
+        sessionStorage['myFirstKey'] = 'myFirstValue3';
+        alert(sessionStorage.myFirstKey);
+
+        // 显示Storage事件内容的事件处理程序
+        // 显示Storage事件的详细信息
+        function displayStorageEvent(e) {
+            var logged = 'key:' + e.key + ', newValue: ' + e.newValue + ', oldValue: ' + e.oldValue + ', url: ' + e.url + ', storageArea: ' + e.storageArea;
+            alert(logged);
+        }
+
+        // 添加Storage事件监听器
+        window.addEventListener('storage', displayStorageEvent, true);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

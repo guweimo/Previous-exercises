@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Canvas - 树</title>
+</head>
+
+<body>
+    <canvas id="trails" style="border: 1px solid" width="400" height="400">
+    </canvas>
+    <script>
+        
+        function drawTrails() {
+            var canvas = document.getElementById('trails');
+            var context = canvas.getContext('2d');
+
+            context.save();
+            context.translate(130, 250);
+            
+            // 加宽线条
+            context.lineWidth = 4;
+
+            // 平滑路径的结合点
+            context.lineJoin = 'round';
+
+            // 将颜色改为棕色
+            context.strokeStyle = '#663300';
+
+            // 将填充色设置为绿色并填充树冠
+            context.fillStyle = '#339900';
+
+            // 将填充色设为棕色
+            context.fillStyle = '#663300';
+
+            // 填充用作树干的矩形区域
+            context.fillRect(-5, -50, 10, 50);
+            
+
+            // 创建表现树冠的路径
+            createCanopyPath(context);
+
+            // 绘制当前路径
+            context.fill();
+            context.stroke();
+            context.restore();
+        }
+
+        function createCanopyPath(context) {
+            // 绘制树冠
+            context.beginPath();
+            context.moveTo(-25, -50);
+            context.lineTo(-10, -80);
+            context.lineTo(-20, -80);
+            context.lineTo(-5, -110);
+            context.lineTo(-15, -110);
+
+            // 树的顶点
+            context.lineTo(0, -140);
+
+            context.lineTo(15, -110);
+            context.lineTo(5, -110);
+            context.lineTo(20, -80);
+            context.lineTo(10, -80);
+            context.lineTo(25, -50);
+
+            // 连接起点，闭合路径
+            context.closePath();    
+        }
+
+        window.addEventListener('load', drawTrails, true);
+    </script>
+</body>
+
+</html>

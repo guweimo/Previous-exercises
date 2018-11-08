@@ -1,0 +1,249 @@
+parent child sibling
+parent 父节点
+child 子节点
+sibling 同胞节点
+
+getElementByID              获取id的元素
+getElementsByTagName        获取带有指定标签名的所有元素的列表
+getElementsByClassName      获取带有指定类名的所有元素的列表
+appentChild                 添加一个子节点到指定节点
+removeChild                 删除子节点
+replaceChild                替换子节点
+insertBefore                在指定的子节点前面插入新的节点
+createAttribute             创建属性节点
+createElement               创建元素节点
+createTextNode              创建文本节点
+getAttribute                获取指定的属性值
+setAttribute                设置成指定的值
+
+
+
+anchors                     锚？或者是带着name属性的链接<a>标签？
+document.domain             返回当前的网页的域名
+document.lastModified       返回修改文件的时间
+document.referrer           返回载入当前文档的文档的URL
+document.title              返回该文档的标题
+document.URL                返回当前文档的URL                
+
+
+------------------------------------------元素相关----------------------------------------------
+如何创建一个新的子节点：
+例子：
+    var node = document.createElement('li');
+    var text = document.createTextNode('sdfdsaf');
+    node.appentChild(text);
+    document.getElementById('sdf').appentChild(node);
+
+
+element.id                  设置或返回元素的id
+element.innerHTML           设置或返回元素的内容
+element.style               设置或返回元素的style属性
+element.tabIndex            设置或返回元素的tab键控制次序
+element.tagName             设置或返回元素的标签名
+element.textContent         设置或返回节点及其后代的文本内容
+element.title               设置或返回元素的title属性
+element.lang                设置或返回元素的语言代码属性
+
+element.toString()          把元素转换为字符串
+nodelist.item()              返回NodeList中位于指定下标的节点
+nodelist.length             返回NodeList中的节点数
+
+
+--------------------------is***----------------------------
+element.isContentEditable   返回元素是否可编辑
+element.isDefaultNamespace()        如果指定的namespaceURL是默认的，则返回true，否则返回false;
+element.isEqualNode()       检查两个元素是否相等
+element.isSameNode()        检查两个元素是否是相同的节点
+element.isSupported()       如果元素支持指定特性，则返回true
+
+-----------------------子节点相关---------------------------
+element.insertBefore()      在指定已有的子节点之前插入新节点
+element.appendChild         向元素添加一个子节点，作为最后一个子节点
+element.removeChild()       向元素删除最后一个子节点
+element.replaceChild()      向元素替换一个子节点
+element.className           设置或者获得class属性
+element.childNodes          返回节点的子节点
+element.firstChild          返回元素的首个子节点
+element.lastChild           返回元素的最后一个子节点
+element.nextsibling         返回位于相同节点树层级的下一个子节点
+
+
+--------------------------属性相关--------------------------
+element.attributes          返回元素的属性
+element.getAttribute()      返回节点的指定属性名
+element.getAttributeNode()  返回指点的属性节点
+element.setAttribute()      把指定属性设置或更改为指定值
+element.setAttributeNode()  设置或更改设定属性节点
+
+
+---------------------------node------------------------------
+element.nodeName            返回元素的名称
+element.nodeType            返回元素的节点类型
+element.nodeValue           设置或返回元素值
+element.normalize()         合并元素中相邻的文本节点，并移除空的文本节点
+
+
+-----------------------返回对象或集合------------------------------
+element.getElementsByTagName()      返回拥有指定标签名的所有元素的集合
+
+element.getFeature()        返回实现了指定特性的API的某个对象
+element.getUserData()       返回关联元素上键的对象
+element.setUserData()       把对象关联到元素上的键
+
+-------------------------返回-------------------------
+element.namespaceURL        返回元素的namespace URL
+
+-------------------------has**---------------------------
+element.hasAttribute()      如果元素拥有指定属性，则返回true, 否则返回false
+element.hasAttributes()     如果元素拥有属性，则返回true，否则返回false
+element.hasChildNodes()     如果元素拥有子节点，则返回true，否则返回false
+
+element.cloneNode           克隆元素        
+使用方法    var n = element.cloneNode(true);    element2.appentChild(n);
+
+element.compareDocumentPosition()       比较两个元素的位置 
+使用方法    element.conpareDocumentposition(element2);
+返回值可能是：
+1：没有关系，两个节点不属于同一个文档。
+2：第一节点（P1）位于第二个节点后（P2）。
+4：第一节点（P1）定位在第二节点（P2）前。
+8：第一节点（P1）位于第二节点内（P2）。
+16：第二节点（P2）位于第一节点内（P1）。
+32：没有关系，或是两个节点是同一元素的两个属性。
+
+element.contentEditable     设置或返回元素的内容是否可编辑
+element.dir                 设置或返回元素的文本方向
+
+
+-----------------------元素的高度和宽度----------------------------
+element.clientHeight        返回元素的可见高度
+element.cilentWidth         返回元素的可见宽度
+element.offsetHeight        返回元素的高度
+element.offsetWidth         返回元素的宽度
+element.scrollHeight        返回元素的整体高度
+element.scrollWidth         返回元素的整体宽度
+element.scrollLeft          返回元素左边缘与视图之间的距离
+element.scrollTop           返回元素上边缘与视图之间的距离
+
+
+------------------------------对比------------------------------
+element.insertBefore()
+注释：
+首先请创建一个 LI 节点，
+然后创建一个文本节点，
+然后向这个 LI 节点追加文本节点。
+最后在列表中的首个子节点之前插入此 LI 节点。         
+element.appentChild()  
+共同点：给元素添加一个子节点。 
+不同点：insertBefore是向元素的所有子节点之前添加，而appentChild()是向元素的子节点最后添加。
+
+
+
+------------------------------------------属性和方法----------------------------------------------
+
+attr.isId                   如果属性是id类型，则返回true，否则返回false
+attr.name                   返回属性的名称
+attr.value                  设置或返回属性的值
+attr.specified              如果已指定属性，则返回true，否则返回false
+nodemap.getNamedItem()      从NamedNodeMap返回指定的属性节点
+nodemap.item()              返回NamedNodeMap中位于指定下标的节点
+nodemap.length              返回NamedNodeMap中的节点数
+nodemap.removeNamedItem()   移除指定的属性节点
+nodemap.setNamedItem()      设置指定的属性节点
+
+
+------------------------------DOM 4 警告--------------------------------------
+为了保证未来的代码安全，您应该避免在属性对象上使用节点对象的属性和方法：
+属性/方法                    避免的理由
+attr.appendChild()          属性没有子节点
+attr.attributes             属性没有属性
+attr.baseURI                使用documen.baseURI代替
+attr.childNodes             属性没有子节点
+attr.cloneNode()            使用attr.value代替
+attr.firstChild             属性没有子节点
+attr.hasAttributes()        属性没有属性
+attr.hasChildNodes()        属性没有子节点
+attr.insertBefore()         属性没有子节点
+attr.isEqualNode()          没有意义
+attr.isSameNode()           没有意义
+attr.isSupported()          始终为true
+attr.lastChild              属性没有子节点
+attr.nextSibling            属性没有同级节点
+attr.nodeName               使用attr.name代替
+attr.nodeType               始终为2
+attr.nodeValue              使用attr.value代替
+attr.normalize()            属性无法被正常化
+attr.ownerDocument          始终是您的HTML文档
+attr.ownerElement           这是您用来访问该属性的HTML元素
+attr.parentNode             这是您用来访问该属性的HTML元素
+attr.previousSibling        属性没有同级节点
+attr.removeChild            属性没有子节点
+attr.replaceChild           属性没有子节点
+attr.textContent            使用attr.value代替
+
+
+
+-----------------------------------------Event 对象---------------------------------------------
+
+------------------------------事件句柄--------------------------------------
+属性                        此事件发生在何时
+onabort                     图像的加载被打断
+onblur                      元素失去焦点
+onchange                    域的内容被改变
+onclick                     当用户点击某个对象时调用的事件句柄
+ondblclick                  当用户双击某个对象时调用的事件句柄
+onerror                     在加载文档或图像时发生错误
+onfocus                     元素获得焦点
+onkeydowm                   某个键盘按键按下
+onkeypress                  某个键盘按键被按下并松开
+onkeyup                     某个键盘按键被松开
+onload                      一张页面或一副图像完成加载
+onmousedown                 鼠标按钮按下
+onmousemove                 鼠标被移动
+onmouseout                  鼠标从某元素移开
+onmouseover                 鼠标移到某个元素之上
+onmouseup                   鼠标按键松开
+onreset                     重置按钮被点击
+onresize                    窗口或框架被重新调整大小
+onselect                    文本被选中
+onsubmit                    确认按钮被点击
+onunload                    用户退出页面
+
+-----------------------------鼠标 / 键盘属性-------------------------------
+altKey                      返回当事件被触发时，“ALT”是否被按下
+button                      返回当事件被触发时，哪个鼠标按钮被点击
+clientX                     返回当事件被触发时，鼠标指针相对于浏览器页面的水平坐标
+clientY                     返回当事件被触发时，鼠标指针相对于浏览器页面的垂直坐标
+ctrKey                      返回当事件被触发时，“Ctrl”是否被按下
+metaKey                     返回当事件被触发时，“meta”是否被按下
+relatedTarget               返回与事件的目标节点相关的节点
+screenX                     返回当某个事件被触发时，鼠标指针相对于屏幕的水平坐标
+screenY                     返回当某个事件被触发时，鼠标指针相对于屏幕的垂直坐标
+shiftKey                    返回当事件被触发时，“SHIFT”键是否被按下
+
+-----------------------------IE 属性-------------------------------
+cancelBubble                如果事件句柄想阻止事件传播到包容对象，必须把属性设为true
+fromElement                 对于mouseover和mouseout事件，fromElement引用移除鼠标的元素
+keyCode                     对于keypress事件，该属性声明了被敲击的键生成的Unicode字符码。对于keydown和keyup事件，
+                            它指定了被敲击的键的虚拟键盘码。虚拟键盘码可能和使用的键盘的布局相关
+offsetX, offsetY            发生事件的地点在事件源元素的坐标系统中的x坐标和y坐标
+returnValue                 如果设置了该属性，它的值比事件句柄的返回值优先级高。把这个属性设置为fasle，
+                            可以取消发生事件的源元素的默认动作
+srcElement                  对于生成事件的Window对象、Document对象或Element对象的引用
+toElement                   对于mouseover 和 mouseout 事件，该属性引用移入鼠标的元素
+x, y                        事件发生的位置的 x 坐标和 y 坐标，它们相对于用CSS动态定位的最内层包容元素
+
+--------------------------标准 Event 属性---------------------------
+bubbles                     返回布尔值，指示事件是否是起泡事件类型
+cancelable                  返回布尔值，指示事件是否可拥可取消的默认动作
+currentTarget               返回其事件监听器触发该事件的元素
+eventPhase                  返回事件传播的当前阶段
+target                      返回触发此事件的元素（事件的目标节点）
+timeStamp                   返回事件发生的日期和时间
+type                        返回当前Event对象表示的事件的名称
+
+--------------------------标准 Event 方法---------------------------
+initEvent()                 初始化新创建的Event对象的属性
+preventDefault()            通知浏览器不要执行与事件关联的默认动作
+stopPropaqation()           不再派发事件
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Worker - 检测浏览器是否支持Worker功能</title>
+    <script>
+        function loadDemo() {
+            if (typeof(Worker) !== 'underfined') {
+                document.getElementById('support').innerHTML = 'Excellent! Your browser supports Web Workers';
+            }
+        }
+        window.addEventListener('load', loadDemo, true);
+        // 创建Web Workers
+        worker = new Worker('echoWorker.js');
+        // 共享Worker
+        sharedWorker = new SHaredWorker('sharedEchoWorker.js');
+
+        // 多个JavaScript文件的加载和执行
+        importScripts('helper.js');
+
+        importScripts('helper.js', 'anotherHelper.js');
+
+    </script>
+    <!-- 内联Worker -->
+    <script id="myWorker" type="javascript/worker"></script>
+</head>
+
+<body>
+    <div id="support"></div>
+</body>
+
+</html>

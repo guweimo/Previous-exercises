@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>drag - 拖放</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<link rel="stylesheet" href="html5.css">
+
+	<style type="text/css">
+		label {
+			text-align: right;
+			width: 90px;
+			float: left;
+		}
+		
+		input {
+			margin-top: 0px;
+			padding-top: 0px;
+		}
+		
+		fieldset {
+			margin-top: 5px;
+		}
+		
+		#confidenceDisplay {
+			vertical-align: top;
+		}
+
+        #members li {
+            cursor: move;
+        }
+
+        .hightlighted {
+            background-color: yellow;
+        }
+
+        .validtarget {
+            background-color: lightblue;
+        }
+
+		.dropList::after, article::after {
+			content: " ";
+			display: block;
+			clear: both;
+		}
+
+		.dropList {
+			width: 50%;
+			float: left;
+		}
+	</style>
+
+	<script>
+		// 这些数组分别用来保存参赛者和志愿者成员姓名
+		var racers = [];
+		var volunteers = [];
+
+		// 这些变量用来存储用以显示谁是参赛者或志愿者的视觉元素的引用
+		var racersList;
+		var volunteersList;
+
+		// 注册事件处理器
+		function loadDemo() {
+			racersList = document.getElementById('racers');
+			
+			volunteersList = document.getElementById('volunteers');
+
+			// 目标列表注册了drag enter、leave和drop事件处理器
+			var lists = [racersList, volunteersList];
+
+			[].forEach.call(lists, function(list) {
+				list.addEventListener('dragenter', handleDragEnter, false);
+				list.addEventListener('dragleave', handleDragLeave, false);
+				list.addEventListener('drop', handleDrop, false);
+			});
+
+			// 每个目标列表都有一个特定的dragover事件处理器
+			racersList.addEventListener('dragover', handleDragOverRacers, false);
+			volunteersList.addEventListener('dragover', handleDragOverVolunteers, false);
+
+			// 列表外圈的fieldset起到缓冲作用，用来重置drag over的样式
+			var fieldsets = document.querySelectorAll('#racersField, #volunteersField');
+			[].forEach.call(fieldsets, function(fieldset) {
+				fieldset.addEventListener('dragover', handleDragOverOuter, false);
+			});
+
+			// 每个可拖动的成员都有拖动开始和结束事件处理器
+			var members = document.querySelectorAll('#members li');
+			[].forEach.call(members, function(member) {
+				member.addEventListener('dragstart', handleDragStart, false);
+				member.addEventListener('dragend', handleDragEnd, false);
+			});
+		}
+
+		window.addEventListener('load', loadDemo, false);
+
+		// dragstart事件处理器
+		// 开始拖动时调用
+		function handleDragStart(evt) {
+			
+			// 拖动只支持copy操作
+			evt.effectAllowed = 'copy';
+			
+			// 拖动起始目标时成员之一
+			// 成员的数据不是姓名就是年龄
+			evt.dataTransfer.setData('text/plain', evt.target.textContent);
+			evt.dataTransfer.setData('text/html', evt.target.dataset.age);
+
+			// 高亮潜在的放置目标
+			racersList.className = 'validtarget';
+			volunteersList.className = 'validtarget';
+
+			return true;
+		}
+
+		// dragenter 和 dragleave事件处理器
+		// 停止传播，阻止默认的拖动动作将我们的目标列表显示为有效的放置目标
+		function handleDragEnter(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			return false;
+		}
+
+		function handleDragLeave(evt) {
+			return false;
+		}
+
+		// 外部容器的dragover事件处理器
+		// 为了实现更好的放置反馈效果，我们将fieldset元素上的dragover事件作为关闭高亮效果的标记
+		function handleDragOverOuter(evt) {
+
+			// 因为Firefox浏览器从嵌套子元素开始向父元素触发dragover事件，所以我们在处理之前现检查id
+			if (evt.target.id == 'racersField'){
+				racersList.classNmae = 'validtarget';
+			} else if (evt.target.id == 'volunteersField') {
+				volunteersList.className = 'validtarget';
+			}	
+
+			evt.stopPropagation();
+			return false;
+		}
+
+		// 目标列表的dragover事件处理器
+		// 如果用户鼠标悬停在列表上，会显示为允许复制，同时为了提供更好的反馈效果，目标列表被高亮显示
+		function handleDragOverRacers(evt) {
+			evt.dataTransfer.dropEffect = 'copy';
+			evt.stopPropagation();
+			evt.preventDefault();
+
+			racersList.className = 'highlighted';
+			return false;
+		}
+
+		function handleDragOverVolunteers(evt) {
+			evt.dataTransfer.dropEffect = 'copy';
+			evt.stopPropagation();
+			evt.preventDefault();
+
+			volunteersList.className = 'highlighted';
+			return false;
+		}
+
+		// 目标列表的drop事件处理器
+		// 当用户在目标列表上进行放置操作时，传输数组
+		function handleDrop(evt) {
+			evt.preventDefault();
+			evt.stopPropagation();
+
+			var dropTarget = evt.target;
+			
+			// 使用text类型获取拖动项中的姓名
+			var text = evt.dataTransfer.getData('text/plain');
+
+			var group = volunteers;
+			var list = volunteersList;
+
+			// 如果放置目标列表时参赛者列表，那么额外获取一种代表成员年龄的数据格式，并加在开始处
+			if ((dropTarget.id != 'volunteers') && (dropTarget.parentNode.id != 'volunteers')) {
+				text = evt.dataTransfer.getData('text/html') + ': ' + text;
+				group = racers;
+				list = racersList;
+			}
+
+			// 为简单起见，清除旧列表并重置
+			if (group.indexOf(text) == -1) {
+				group.push(text);
+				group.sort();
+
+				// 移除所有旧的子节点
+				while (list.hasChildNodes()) {
+					list.removeChild(list.lastChild);
+				}
+
+				// 推入所有新的子节点
+				[].forEach.call(group, function(person) {
+					var newChild = document.createElement('li');
+					newChild.textContent = person;
+					list.appendChild(newChild);
+				});
+			}
+			return false;
+		}
+
+		// 用于清空的dragend事件处理器
+		// 确保清空所有的拖动操作 
+		function handleDragEnd(evt) {
+
+			// 恢复潜在放置目标样式
+			racersList.className = null;
+			volunteersList.className = null;
+			return false;
+		}
+    </script>
+
+</head>
+
+<body>
+	<div id="container">
+		<header>
+			<h1>Tahoe 216</h1>
+			<h3 align="center">3 Days, 216-Miles, One Crazy Runner's High</h3>
+			<h2>&nbsp;</h2>
+			<h4>Live Results Now!</h4>
+		</header>
+
+		<nav>
+			<h2>Links</h2>
+			<a href="index.html" title="Home">Home</a>
+			<a href="signup.html" title="Are you crazy enough?">Sign Up</a>
+			<a href="about.html" title="Learn more about the T216">About the Race</a>
+		</nav>
+
+		<section>
+			<article>
+				<p>Drag members to either the Racers or Volunteers list.</p>
+                <ul id="members">
+                    <li draggable="true" data-age="38">Brian Albers</li>
+                    <li draggable="true" data-age="25">Frank Salim</li>
+                    <li draggable="true" data-age="47">Jennifer Clark</li>
+                    <li draggable="true" data-age="18">John Kemble</li>
+                    <li draggable="true" data-age="20">Lorraine Gaunce</li>
+                    <li draggable="true" data-age="30">Mark Wang</li>
+                    <li draggable="true" data-age="41">Morgan Stephen</li>
+                    <li draggable="true" data-age="39">Peter Lubbers</li>
+                    <li draggable="true" data-age="33">Vanessa Combs</li>
+                    <li draggable="true" data-age="54">Vivian Lopez</li>                    
+                </ul>
+                <div class="dropList">
+                    <fieldset id="racersField">
+                        <legend>Racers (by Age): </legend>
+                        <ul id="racers" dropzone="copy s:text/plain s:text/html" ondrop="handleDrop(event)"></ul>
+                    </fieldset>
+                </div>
+
+                <div class="dropList" >
+                    <fieldset id="volunteersField">
+                        <legend>Volunteers (by Name): </legend>
+                        <ul id="volunteers" dropzone="copy s:text/plain s:text/html" ondrop="handleDrop(event)"></ul>
+                    </fieldset>
+                </div>
+			</article>
+		</section>
+
+		<aside>
+			<h2>Sponsors</h2>
+			<p align="center">Happy Trails Running Club</p>
+			<p align="center"><img src="happy-trails-rc.gif" alt="Happy Trails Running Club" width="149" height="207"></p>
+		</aside>
+
+		<footer>
+			<p>Powered by HTML5</p>
+		</footer>
+
+	</div>
+</body>
+
+</html>

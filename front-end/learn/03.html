@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ul>
+        <li>click me4</li>
+        <li>click me3</li>
+        <li>click me2</li>
+        <li>click me1</li>
+    </ul>
+    <script>
+        var elements=document.getElementsByTagName('li');
+        var length=elements.length;
+        for(var i=0;i<length;i++){
+            elements[i].onclick=function(){
+                alert(i);
+                alert(this.innerText);
+            }
+        }
+        function getCount(str) {
+            var x = str.match(/x/gi);
+            var o = str.match(/o/gi);
+            console.log((x && x.length));
+            return (x && x.length) === (o && o.length);
+        }
+        p = getCount('sfaooxosoxox');
+        console.log(p);
+    </script>
+</body>
+
+</html>

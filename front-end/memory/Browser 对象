@@ -1,0 +1,182 @@
+
+---------------------------------------------Window 对象---------------------------------------------
+Window 对象表示浏览器中打开的窗口。
+
+
+--------------------------------Window 对象集合-------------------------------------
+frames[]                        返回窗口中所有命名的框架。
+                                该集合是 Window 对象的数组，每个 Window 对象在窗口中含有一个框架或 <iframe>。属性 frames.length。
+                                属性frames.length 存放数组 frames[]中含有的元素个数。 注意，frames[] 数组中引用的框架可能还包
+                                括框架，它们自己也具有frames[]数组
+
+
+--------------------------------Window 对象属性-------------------------------------
+closed                          返回窗口是否已被关闭
+defaultStatus                   设置或返回窗口状态栏中的默认文本
+document                        对 Document 对象的只读引用
+history                         对 history  对象的只读引用
+innerheight                     返回窗口的文档显示区的高度
+innerwidth                      返回窗口的文档显示区的宽度
+length                          设置或返回窗口中的框架数量
+location                        用于窗口或框架的Location对象
+name                            设置或返回窗口的名称
+Navigator                       对 Navigator 对象的只读引用
+opener                          返回对创建此窗口的窗口的引用
+outerheight                     返回窗口的外部高度
+outerwidth                      返回窗口的外部宽度
+pageYOffset                     设置或返回当前页面相对于窗口显示区左上角的 X 位置
+pageXOffset                     设置或返回当前页面相对于窗口显示区左上角的 Y 位置
+parent                          返回父窗口
+Screen                          对 Screen 对象的只读引用
+self                            返回对当前窗口的引用。等价于 Window 属性
+status                          设置窗口状态栏的文本
+top                             返回最顶层的先辈窗口
+Window                          window 属性等价于 self 属性，它包含了对
+screenLeft                      只读整数。声明了窗口的左上角在屏幕上的 x 的坐标和 y 坐标。 IE、Safari 和 Opera支持
+screenTop                       screenLeft 和 screenTop， 当Firefox 和 Safari 支持 screenX 和 screenY
+screenX
+screenY
+
+--------------------------------Window 对象方法-------------------------------------
+alert()                         显示带有一段消息和一个确认按钮的警告框
+blur()                          把键盘焦点从顶层窗口移开
+clearInterval()                 取消由 setInterval() 设置的timeout
+clearTimeout()                  取消由 setTimeout() 方法设置的timeout
+close()                         关闭浏览器窗口
+confirm()                       显示带有一段消息以及确认按钮和取消按钮的对话框
+createPopup()                   创建一个 pop-up 窗口
+focus()                         把键盘焦点给予一个窗口
+moveBy(x, y)                    可相对窗口的当前坐标把它移动指定的像素
+moveTo(x, y)                    把窗口的左上角移动到一个指定的坐标
+open()                          打开一个新的浏览器窗口或查找一个已命名的窗口
+print()                         打印当前窗口的内容
+prompt()                        显示可提示用户输入的对话框
+resizeBy()                      按照指定的像素调整窗口的大小
+resizeTo()                      把窗口的大小调整到指定的宽度和高度
+scrollBy()                      按照指定的像素值来滚动内容
+scrollTo()                      把内容滚动到指定的坐标
+setInterval()                   按照指定的周期(以毫秒计)来调用函数或计算表达式
+setTimeout()                    在指定的毫秒数后调用函数或计算表达式
+
+
+---------------------------------------------Navigator 对象---------------------------------------------
+
+--------------------------------Navigator 对象集合-------------------------------------
+plugins[]                       返回一个对文档中所有嵌入式对象的引用
+                                该集合是一个 plugin 对象的数组，其中的元素代表浏览器已经安装的插件。Plug-in 对
+                                像提供的是有关插件的信息，其中包括它所支持的 MIME 类型的列表
+                                虽然 plugins[] 数组是由 IE4 定义的，但是在 IE4 中它却总是空的，因为 IE4 不支持
+                                插件和 Plugin 对象
+
+--------------------------------Navigator 对象属性-------------------------------------
+appCodeName                     返回浏览器的代码名
+appMinorVersion                 返回浏览器的次级版本
+appName                         返回浏览器的名称
+appVersion                      返回浏览器的平台和版本信息
+browserLanguage                 返回当前浏览器的语言
+cookieEnabled                   返回指明浏览器中是否启用cookie的布尔值
+cpuClass                        返回浏览器系统的cpu等级
+onLine                          返回指明系统是否处于脱机模式的布尔值
+platform                        返回运行浏览器的操作系统平台
+systemLanguage                  返回 OS 使用的默认语言
+userAgent                       返回由客户机发送服务器的 user-agent 头部的值
+userLanguage                    返回 OS 的自然语言设置
+
+
+--------------------------------Navigator 对象方法-------------------------------------
+javaEnabled()                   规定浏览器是否启用 Java
+taintEabled()                   规定浏览器是否启用数据污点
+
+
+Navigator 对象描述
+
+Navigator 对象包含的属性描述了正在使用的浏览器。可以使用这些属性进行平台专用的配置。
+
+虽然这个对象的名称显而易见的是 Netscape 的 Navigator 浏览器，但其他实现了 JavaScript 的浏览器也支持这个对象。
+
+Navigator 对象的实例是唯一的，可以用 Window 对象的 navigator 属性来引用它。
+
+
+---------------------------------------------Screen 对象---------------------------------------------
+availHeight                     返回显示屏幕的高度（除 Windows 任务栏之外）
+availWidth                      返回显示屏幕的宽度（除 Windows 任务栏之外）
+bufferDepth                     设置或返回调色板的比特深度
+colorDepth                      返回目标设备或缓冲器上的调色板的比特深度
+deviceXDPI                      返回显示屏幕的每英寸水平点数
+deviceYDPI                      返回显示屏幕的每英寸垂直点数
+fontSmoothingEnabled            返回用户是否在显示控制面板中启用了字体平滑
+height                          返回显示屏幕的高度
+logicalXDPI                     返回显示屏幕每英寸的水平方向的常规点数
+logicalYDPI                     返回显示屏幕每英寸的垂直方向的常规点数
+pixelDepth                      返回显示屏幕的颜色分辨率（比特每像素）
+updateInterval                  设置或返回屏幕的刷新率
+width                           返回显示屏幕的宽度
+
+
+Screen 对象描述
+
+每个 Window 对象的 screen 属性都引用一个 Screen 对象。Screen 对象中存放着有关显示浏览器屏幕的信息。JavaScript 程序
+将利用这些信息来优化它们的输出，以达到用户的显示要求。例如，一个程序可以根据显示器的尺寸选择使用大图像还是使用小图像，
+它还可以根据显示器的颜色深度选择使用 16 位色还是使用 8 位色的图形。另外，JavaScript 程序还能根据有关屏幕尺寸的信息将新
+的浏览器窗口定位在屏幕中间。
+
+
+---------------------------------------------Screen 对象---------------------------------------------
+History 对象
+
+History 对象包含用户（在浏览器窗口中）访问过的 URL。
+
+History 对象是 window 对象的一部分，可通过 window.history 属性对其进行访问。
+
+--------------------------------History 对象属性-------------------------------------
+length                          返回浏览器历史列表中的URL数量
+
+--------------------------------History 对象方法-------------------------------------
+back()                          加载 history 列表中的前一个URL
+forward()                       加载 history 列表中的下一个URL
+qo()                            加载 history 列表中的某个具体页面
+
+
+---------------------------------------------Location 对象---------------------------------------------
+Location 对象
+
+Location 对象包含有关当前 URL 的信息。
+
+Location 对象是 Window 对象的一个部分，可通过 window.location 属性来访问。
+
+--------------------------------Location 对象属性-------------------------------------
+hash                            设置或返回从井号(#)开始的URL(锚)
+host                            设置或返回主机名和当前 URL 的端口号
+hostname                        设置或返回当前 URL 的主机名
+href                            设置或返回完整的 URL
+pathname                        设置或返回当前的 URL 的路径部分
+port                            设置或返回当前的 URL 的端口号
+protocol                        设置或返回当前 URL 的协议
+search                          设置或返回从问号(?)开始的 URL (查询部分)
+
+--------------------------------Location 对象方法-------------------------------------
+assign()                        加载新的文档
+reload()                        重新加载当前文档
+replace()                       用新的文档替代当前文档
+
+
+
+
+Location 对象描述
+
+Location 对象存储在 Window 对象的 Location 属性中，表示那个窗口中当前显示的文档的 Web 地址。它的 href 属性存放的是文档的完整 URL，
+其他属性则分别描述了 URL 的各个部分。这些属性与 Anchor 对象（或 Area 对象）的 URL 属性非常相似。当一个 Location 对象被转换成字符串，
+href 属性的值被返回。这意味着你可以使用表达式 location 来替代 location.href。
+
+不过 Anchor 对象表示的是文档中的超链接，Location 对象表示的却是浏览器当前显示的文档的 URL（或位置）。但是 Location 对象所能做的远远
+不止这些，它还能控制浏览器显示的文档的位置。如果把一个含有 URL 的字符串赋予 Location 对象或它的 href 属性，浏览器就会把新的 URL 所指
+的文档装载进来，并显示出来。
+
+除了设置 location 或 location.href 用完整的 URL 替换当前的 URL 之外，还可以修改部分 URL，只需要给 Location 对象的其他属性赋值即可。
+这样做就会创建新的 URL，其中的一部分与原来的 URL 不同，浏览器会将它装载并显示出来。例如，假设设置了Location对象的 hash 属性，那么浏览
+器就会转移到当前文档中的一个指定的位置。同样，如果设置了 search 属性，那么浏览器就会重新装载附加了新的查询字符串的 URL。
+
+除了 URL 属性外，Location 对象的 reload() 方法可以重新装载当前文档，replace() 可以装载一个新文档而无须为它创建一个新的历史记录，也就
+是说，在浏览器的历史列表中，新文档将替换当前文档。
+
+

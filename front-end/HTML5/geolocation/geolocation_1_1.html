@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Geolocation - 检测能否使用Geolocation</title>
+</head>
+
+<body>
+    <div id="support"></div>
+    <button onclick="loadDemo()">s</button>
+    <script>
+        function loadDemo() {
+            if(navigator.geolocation) {
+                document.getElementById('support').innerHTML = 'Geolocation supported.';
+            } else {
+                document.getElementById('support').innerHTML = 'Geolocation is not supported in your browser.'
+            }
+        }
+    </script>
+</body>
+
+</html>

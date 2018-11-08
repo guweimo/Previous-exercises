@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Form - 表单特性和函数</title>
+    <style type="text/css">
+        input, textarea, button {
+            padding: 5px;
+            margin: 10px;
+            
+        }
+    </style>
+	<script>
+		// invalid事件的事件处理函数
+		function invalidHandler(evt) {
+			var validity = evt.srcElement.validity;
+			// 检测有效性，看是否某个特定的验证条件没有通过
+			if (validity.valueMissing) {
+				// 提示用户必须项中没有填值
+
+				// 可能检测更多的约束条件……
+				// 如果不希望浏览器提供默认的验证反馈，按照下面的方式取消事件
+				evt.preventDefault();
+			}
+
+			// 注册invalid事件的监听器
+			myField.addEvenetListener('invalid', invalidHandler, false);
+		}
+	</script>
+</head>
+
+<body>
+	<form>
+		1. <input type="text" placeholder="idfaslkfjdlkf"> <br />
+		2. <input type="text" name="fsdf" autocomplete="true"> <br />
+		3. <input type="text" autofocus>    <br />
+        4. <textarea id="my" spellcheck="false"></textarea> <br />
+		5. <datalist id="contactList">
+			<option value="x@example.com" label="Racer X">
+			<option value="peter@example.com" label="Peter" >
+		</datalist>
+		<input type="email" list="contactList" ><br />
+		6. <input type="range" min="0" max="100" value="0" ><br />
+		7. <input type="range" min="0" max="100" step="5" value="0" /> <br />
+		8. <input type="range" id="nameR" min="0" max="100" step="5" value="0" /> <br />
+		<script>
+			document.getElementById('nameR').valueAsNumber = 65;
+		</script>
+		9. <input type="text" id="firstname" name="first" required> <br />
+		<button type="submit" value="111">sfdsf</button>
+
+
+	</form>
+</body>
+
+</html>

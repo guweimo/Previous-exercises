@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Worker - </title>
+	<link rel="stylesheen" href="styles.css" />
+</head>
+
+<body>
+	<h1>Simple Web Workers Example</h1>
+	<p id="support">Your browser does not support Web Workers.</p>
+	<button id="stopButton">Stop Task</button>
+	<button id="helloButton">Post a Message</button>
+	<script>
+        function stopWorker() {
+            // 停止Web Workers
+            worker.terminate();
+        }
+
+        function messageHandler(e) {
+            // 处理Worker发来的消息
+            console.log(e.data);
+        }
+
+        // 处理错误
+        function errorHandler(e) {
+            console.log(e.message, e);
+        }
+
+        function loadDemo() {
+            if (typeof(Worker) !== 'undefined') {
+                document.getElementById('support').innerHTML = 'Excellent! Your browser supports Web Workers';
+                worker = new Worker('echoWorker.js');
+                // 监听从Web Worker发来的消息
+                worker.addEventListener('message', messageHandler, true);
+                worker.addEventListener('error', errorHandler, true);
+
+                document.getElementById('helloButton').onclick = function() { 
+                    worker.postMessage("Here's a message for you"); 
+                };
+
+                document.getElementById('stopButton').onclick = stopWorker;
+            }
+        }
+
+        
+
+        window.addEventListener('load', loadDemo, true);
+        
+        // 如果是共享Worker
+        /*
+        sharedWorker = new SharedWorker('****.js');
+        sharedWorker.port.addEventListener('message', messageHandler, true);
+        sharedworker.port.postMessage('Hello HTML5');
+        */ 
+        // 嵌套使用
+        // var subWorker = new Worker('subWorker.js');
+
+        // 使用定时器
+        // var t = setTimeout(postMessage, 2000, 'delayed message');
+    </script>
+</body>
+
+</html>
