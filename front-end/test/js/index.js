@@ -4,6 +4,51 @@ const log = console.log.bind(console)
 // JavaScript
 
 window.onload = function () {
+    // 生成随机数数组
+    const getRandom = function(time) {
+        const min = 1
+        const max = 372
+        const arr = []
+        for (let i = 0; i < time; i++) {
+            // 获取min-max的随机数 （包括max
+            let num = Math.floor(Math.random() * (max - min + 1) + min) 
+            arr.push(num)
+        }
+        return arr
+    }
+
+    // 创建banner内容
+    const createBannerContent = function() {
+        const arr = getRandom(5)
+        let banner = document.querySelector('.banner')
+        banner.innerHTML = ''
+        const defaultTem = `<ul>
+            <li>●</li>
+            <li>●</li>
+            <li>●</li>
+            <li>●</li>
+            <li>●</li>
+        </ul>
+        <span></span>`
+        let key = 0
+        for (const i of arr) {
+            let num = ''
+            if (i < 10) {
+                num = `imgs/CHD000${i}.jpg`
+            } else if (i < 100) {
+                num = `imgs/CHD00${i}.jpg`
+            } else {
+                num = `imgs/CHD0${i}.jpg`
+            }
+            let template = `<img src="${num}" alt="第${key}张"/>`
+            banner.innerHTML += template
+            key ++
+        }
+        banner.innerHTML += defaultTem
+    }
+
+    createBannerContent()
+
     var b_img = document.getElementsByClassName('banner')[0].getElementsByTagName('img');
     var b_li = document.getElementsByClassName('banner')[0].getElementsByTagName('li');
     var b_span = document.getElementsByClassName('banner')[0].getElementsByTagName('span')[0];
@@ -60,24 +105,12 @@ window.onload = function () {
         }
     }
 
-    const getRandom = function() {
-        const min = 1
-        const max = 372
-        const arr = []
-        for (let i = 0; i < 12; i++) {
-            // 获取min-max的随机数 （包括max
-            let num = Math.floor(Math.random() * (max - min + 1) + min) 
-            arr.push(num)
-        }
-        return arr
-    }
-
     // 创建图片集
     const createPhoto = function() {
         let pCls = document.querySelector('.photo')
         pCls.innerHTML = ''
         // 获取随机数数组
-        let randomArr = getRandom()
+        let randomArr = getRandom(12)
         let key = 0
         for (let i of randomArr) {
             if (i < 10) {
