@@ -1,4 +1,5 @@
 
+const log = console.log.bind(console)
 
 // JavaScript
 
@@ -59,6 +60,44 @@ window.onload = function () {
         }
     }
 
+    const getRandom = function() {
+        const min = 1
+        const max = 372
+        const arr = []
+        for (let i = 0; i < 12; i++) {
+            // 获取min-max的随机数 （包括max
+            let num = Math.floor(Math.random() * (max - min + 1) + min) 
+            arr.push(num)
+        }
+        return arr
+    }
+
+    // 创建图片集
+    const createPhoto = function() {
+        let pCls = document.querySelector('.photo')
+        pCls.innerHTML = ''
+        // 获取随机数数组
+        let randomArr = getRandom()
+        let key = 0
+        for (let i of randomArr) {
+            if (i < 10) {
+                num = `imgs/CHD000${i}.jpg`
+            } else if (i < 100) {
+                num = `imgs/CHD00${i}.jpg`
+            } else {
+                num = `imgs/CHD0${i}.jpg`
+            }
+            let template = `<div class="photo-lump">
+                <img src="${num}" class="wait-load" alt="第${key + 1}张" title="${num}" />
+                <span>第${key + 1}张</span>
+            </div>`
+            pCls.innerHTML += template
+            key ++
+        }
+    }
+
+    createPhoto()
+
     // 图片集
     de = document.documentElement;
     var p_s = document.getElementsByClassName('screen')[0];
@@ -66,10 +105,10 @@ window.onload = function () {
     p_s.style.width = window.innerWidth + de.scrollLeft - (window.innerWidth - de.scrollWidth) + 'px';
     p_lump = document.getElementsByClassName('photo-lump');
     wait_load = document.getElementsByClassName('wait-load');
-    for (var i = 0; i < p_lump.length; i++) {
-        wait_load[i].alt = '第' + parseInt(i+1) + '张';
-        p_lump[i].getElementsByTagName('span')[0].innerHTML = wait_load[i].alt;
-    }
+    // for (var i = 0; i < p_lump.length; i++) {
+    //     wait_load[i].alt = '第' + parseInt(i+1) + '张';
+    //     p_lump[i].getElementsByTagName('span')[0].innerHTML = wait_load[i].alt;
+    // }
 
     // 关闭图集
     p_img = document.getElementsByClassName('photo-img')[0];
